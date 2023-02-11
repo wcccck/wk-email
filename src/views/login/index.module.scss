@@ -1,0 +1,28 @@
+.container{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
+  //padding-right: 20px;
+  margin-top: 10px;
+  .header{
+    height: 40px;
+  }
+  .userInput{
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 80%;
+    margin-top: 25px;
+    outline: none;
+  }
+}
+
+.button{
+  border-radius: 20px;
+  padding: 10px;
+  width: 75%;
+  border: none;
+  color:#ffffff;
+  margin-top: 20px;
+  background: skyblue;
+}
