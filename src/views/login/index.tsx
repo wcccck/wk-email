@@ -3,19 +3,23 @@ import classes from './index.module.scss'
 import {loginRequest} from '../../http/login'
 import {setToken} from "../../utils/token";
 import {useRoute, useRouter} from "vue-router";
+import useToken from '../../store/tokenStore'
 export default defineComponent({
   setup(){
     const username = ref('')
     const password = ref('')
     const Router = useRouter()
+    const TokenStore = useToken()
     const clickEvent =  function (e:Event){
       if(username.value == '' || password.value== ''){
         alert('请输入')
       }else{
         loginRequest({username:'s1mlpe1',password:"caonima"}).then(res=>{
+
           if(res.code != 500){
             const {data} = res.data
             setToken(data.token)
+            TokenStore.token = data.token
             Router.push('/index')
           }else{
             alert(res.msg)
@@ -27,9 +31,7 @@ export default defineComponent({
 
 
     }
-
     return ()=>{
-      console.log(username.value)
       return <div class={classes.container}>
         <div>{username.value}{password.value}</div>
         <header class={classes.header}>{'<'}</header>
