@@ -1,0 +1,32 @@
+.active{
+  color:red;
+  border-radius: 10px 0px 10px 0px;
+  background: #fceeee;
+}
+.container{
+  height: 40px;
+  width: 93%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 12px;
+
+}
+.icon{
+  margin-right: 10px;
+}
+.leftItem{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 16px;
+}
+.rightItem{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #9c9897;
+  font-size: 13px;
+  font-weight: 600;
+}

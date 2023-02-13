@@ -1,0 +1,22 @@
+.tabBar{
+  position: fixed;
+  //background: skyblue;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: black;
+  box-sizing: border-box;
+  border:1px solid gray;
+
+}
+.activeItem{
+  color: red;
+}
+.tab{
+  padding: 0 10px;
+  //box-sizing: border-box;
+}

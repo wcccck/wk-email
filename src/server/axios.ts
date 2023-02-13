@@ -18,8 +18,8 @@ serve.interceptors.response.use((res)=>{
       if(err.response.data.code && err.response.data.code==401){
         tokenStore.token = ''
         setToken('')
-        console.log(Router)
-        Router.push('/login')
+        // console.log(Router)
+        // Router.push('/login')
       }
   return err.response.data
 })
