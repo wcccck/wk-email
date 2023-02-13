@@ -1,13 +1,38 @@
 .sideBar{
-  width: 140px;
+  padding-top: 10px;
+  width: 80%;
   height: 100%;
   background: skyblue;
   position: absolute;
+  box-sizing: border-box;
   left: 0;
   top: 0;
+  display: flex;
+  //justify-content: center;
+  flex-direction: column;
+  align-items:center;
+  z-index: 10;
 }
 
 .main{
   height: 100%;
   position: relative;
+}
+
+.header{
+  height: 40px;
+  //padding:0 20px;
+  position: sticky;
+  padding-left: 10px;
+  padding-right: 20px;
+  background: pink;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .left{
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+  }
 }

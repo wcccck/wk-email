@@ -1,27 +1,64 @@
-import {defineComponent, ref,Transition} from "vue";
+import {defineComponent, provide, inject, ref, Transition, withModifiers, Ref} from "vue";
+import {RouterView,useRoute} from "vue-router";
 import {getIndexInfo} from '../../http/index'
 import SideBar from "./sideBar/sideBar";
-
+import {sideBarItem} from './sideBar/sideBar'
 import classes from './index.module.scss'
+import Icon from "../../components/Icon/Icon";
+
+
+
+
 export default defineComponent({
   setup(){
-
+    const sideBarItem = ref<sideBarItem[]>([
+      {IconName:'youxiang',activeName:'Inbox',title:'收件箱'},
+      {IconName:'close',activeName:'UnRead',title:'未读'}
+    ])
+    const Route = useRoute()
     const showBar = ref(false)
     getIndexInfo().then(res=>{
       console.log(res)
     })
+    function closeSideBar(){
+      showBar.value && (showBar.value = false)
+    }
+    provide('showBarVariable',showBar)
     return ()=>{
       return (
-        <div class={classes.main}>
+        <div class={classes.main}  onClick={withModifiers(closeSideBar,['stop'] )} >
+          <IndexHeader  btnText={Route.meta.chinaName ? Route.meta.chinaName : '主页'}></IndexHeader>
           <Transition name={'fade'}>
-            {showBar.value ? <SideBar/> : ''}
+            {showBar.value ? <SideBar onCloseSideBar={()=>{showBar.value = false}  } sideItemArr={sideBarItem.value}/> : ''}
           </Transition>
-          <button onClick={()=>{
-            showBar.value = !showBar.value
-            console.log(showBar.value)
-          } }>show or none show or noneshow or noneshow or noneshow or none</button>
+          <RouterView></RouterView>
         </div>
       )
+    }
+  }
+})
+
+const IndexHeader = defineComponent({
+  props:{
+    btnText:{
+      type:String,
+      required:true
+    }
+  },
+  setup(props){
+    const showFatherBar = inject('showBarVariable')
+     // = true
+    return ()=>{
+      return <div class={classes.header}>
+        <div class={classes.left} onClick={withModifiers(()=>{
+          showFatherBar.value = true
+          console.log(34)
+        },['stop']) }>
+          <Icon IconName={'list'} size={'1.5rem'}></Icon>
+          {props.btnText}
+        </div>
+        <div>right</div>
+      </div>
     }
   }
 })
