@@ -6,6 +6,7 @@ export default defineComponent({
     return ()=>{
       return <div>
         <MailCard headImage={''}></MailCard>
+        {/*<MailCard headImage={''}></MailCard>*/}
       </div>
     }
   }

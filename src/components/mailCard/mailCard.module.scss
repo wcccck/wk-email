@@ -5,7 +5,7 @@
   position: relative;
   box-sizing: border-box;
 
-  height: 50px;
+  height: 60px;
   padding: 0 27px;
   //background: skyblue;
   .left{
@@ -17,8 +17,32 @@
   }
   .right{
     margin-left: 10px;
+    padding-top: 10px;
     width: 100%;
-    background: red;
+    height: 100%;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-around;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .fromTitle{
+      font-size: 13px;      
+      font-weight: 600;
+
+    }
+    .lineTitle{
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .LineMessage{
+      font-size: 12px;
+      height: 17px;
+      width: 100%;
+      color: gray;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
   .bottom{
     border-bottom: 1px solid black;

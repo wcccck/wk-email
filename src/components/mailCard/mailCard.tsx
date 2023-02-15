@@ -6,17 +6,17 @@ export default defineComponent({
       type:String,
       required:true
     },
-    InfoTitle:{
+    fromTitle:{
       type:String,
-      required:true
+      // required:true
     },
-    InfoTitle2:{
+    lineTitle:{
       type:String,
-      required:true
+      // required:true
     },
     LineMessage:{
       type:String,
-      required:true
+      // required:true
     },
   },
   setup(props,context){
@@ -28,7 +28,19 @@ export default defineComponent({
             <img src={props.headImage} class={classes.headImage}/>
           </div>
           <div class={classes.right}>
-            文字等东西
+            <div class={classes.fromTitle}>
+              前程无忧51job
+            </div>
+            <div class={classes.lineTitle}>
+              你真帅你妈的
+            </div>
+            <h3 class={classes.LineMessage}>灰色预览文字 灰色预览文字 灰色预览文字 灰色预览文字
+              灰色预览文字
+              灰色预览文字
+              灰色预览文字
+              灰色预览文字
+              灰色预览文字
+            </h3>
           </div>
           <div class={classes.bottom}></div>
         </div>
