@@ -5,6 +5,7 @@ import SideBar from "./sideBar/sideBar";
 import {sideBarItem} from './sideBar/sideBar'
 import classes from './index.module.scss'
 import Icon from "../../components/Icon/Icon";
+import Tabbar, {TabItem} from "../../components/tabbar/tabbar";
 
 
 
@@ -27,9 +28,11 @@ export default defineComponent({
     return ()=>{
       return (
         <div class={classes.main}  onClick={withModifiers(closeSideBar,['stop'] )} >
-          <IndexHeader  btnText={Route.meta.chinaName ? Route.meta.chinaName : '主页'}></IndexHeader>
+
+          <IndexHeader  btnText={Route.meta.chinaName ? Route.meta.chinaName as string : '主页'}></IndexHeader>
           <Transition name={'fade'}>
-            {showBar.value ? <SideBar onCloseSideBar={()=>{showBar.value = false}  } sideItemArr={sideBarItem.value}/> : ''}
+            {/*@ts-ignore*/}
+            {showBar.value ? <SideBar onCloseSideBar={()=>{showBar.value = false}   } sideItemArr={sideBarItem.value}/> : ''}
           </Transition>
           <RouterView></RouterView>
         </div>
@@ -46,7 +49,7 @@ const IndexHeader = defineComponent({
     }
   },
   setup(props){
-    const showFatherBar = inject('showBarVariable')
+    const showFatherBar = inject('showBarVariable') as Ref<boolean>
      // = true
     return ()=>{
       return <div class={classes.header}>

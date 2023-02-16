@@ -15,15 +15,12 @@ export default defineComponent({
         alert('请输入')
       }else{
         loginRequest({username:'s1mlpe1',password:"caonima"}).then(res=>{
-          console.log(res.data)
-          console.log(res.data.code)
           if(res.data.code != 500){
             const {data} = res.data
             setToken(data.token)
             TokenStore.token = data.token
-            Router.push('/index')
+            Router.push('/layout/index')
           }else{
-
             alert(res.data.msg)
           }
 
@@ -40,11 +37,12 @@ export default defineComponent({
         <header class={classes.header}>{'<'}</header>
         <h3>欢迎登录wk邮箱</h3>
         <div>
-          <form action=""></form>
-          <input v-model={username.value} type="text" placeholder={"请输入账号"} class={classes.userInput}/>
-          <input v-model={password.value} type="password" placeholder={"输入密码"} class={classes.userInput}/>
+          <form action="">
+            <input v-model={username.value} type="text" placeholder={"请输入账号"} class={classes.userInput}/>
+            <input v-model={password.value} type="password" placeholder={"输入密码"} class={classes.userInput} autocomplete/>
+          </form>
+
         </div>
-        //@ts-ignore
         <Button onMyClick={clickEvent}>我擦尼玛</Button>
       </div>
     }

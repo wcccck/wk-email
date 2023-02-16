@@ -49,7 +49,7 @@ export const TabItem = defineComponent({
   setup(props, {emit}) {
     const activeIndex =  inject('activeIndex') as Ref<number>
     const ItemClick = function () {
-      activeIndex.value = props.itemIndex
+      activeIndex.value = props.itemIndex as number
       Router.push(props.path!)
     }
     const Router = useRouter()

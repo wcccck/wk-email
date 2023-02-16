@@ -28,11 +28,18 @@
     .fromTitle{
       font-size: 13px;      
       font-weight: 600;
-
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .lineTitle{
       font-size: 13px;
       font-weight: 600;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .LineMessage{
       font-size: 12px;
