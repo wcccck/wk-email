@@ -1,17 +1,22 @@
 import {RouteRecordRaw} from "vue-router";
 import Login from '../views/login/index'
-import Index from '../views/index/index'
-import Inbox from "../views/index/chilrend/Inbox/Inbox";
-import unRead from "../views/index/chilrend/unRead/unRead";
-import Profile from "../views/profile/profile";
+import Message from '../views/message/message'
+import Address from "../views/address/address";
 import layout from "../views/layout/layout";
 import linePage from "../views/linePage/linePage";
+// import Chat from "../views/message/ChatPage/chat";
 import {getToken} from "../utils/token";
+import Discover from "../views/discover/discover";
+import Profile from "../views/profile/profile";
 const routes:RouteRecordRaw[] = [
     {
     path:'/',
-    redirect:'/layout/index'
+    redirect:'/layout/message'
   },
+  // {
+  //   path:"/chat",
+  //   component:Chat
+  // },
   {
     path:'/line',
     component:linePage
@@ -21,37 +26,29 @@ const routes:RouteRecordRaw[] = [
     component:layout,
     children:[
       {
-        path:'/layout/index',
-        component:Index,
-        name:"index",
-        children:[
-          {
-            path:'/layout/index/inbox',
-            component:Inbox,
-            name:"Inbox",
-            meta:{
-              chinaName:"收件箱" as String
-            }
-          },
-          {
-            path:'/layout/index',
-            redirect:'/layout/index/inbox'
-          },
-          {
-            path:"/layout/index/unread",
-            component:unRead,
-            name:"UnRead",
-            meta:{
-              chinaName:"未读" as String
-            }
-          }
-        ]
+        path:'/layout/message',
+        component:Message,
+        name:"index"
+      },
+      {
+        path:'/layout/address',
+        component:Address,
+        name:'Address'
+      },
+      {
+        path:'/layout/discover',
+        component:Discover,
+        name:'Discover'
       },
       {
         path:'/layout/profile',
         component:Profile,
-        name:'Profile'
-      }
+        name:'Profile',
+        meta:{
+
+        }
+
+      },
     ]
   },
     {

@@ -1,4 +1,4 @@
-import serve from "../server/axios";
+import serve from "../utils/axios";
 
 export function getIndexInfo(){
   return serve({

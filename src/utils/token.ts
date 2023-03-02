@@ -4,4 +4,7 @@ export const getToken = function (){
 
 export const setToken = function (JWt:string){
   localStorage.setItem('token',JWt)
+  if(JWt !== '' && JWt){
+    localStorage.setItem('currentTime',Date.now().toString())
+  }
 }

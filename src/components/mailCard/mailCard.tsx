@@ -1,54 +1,43 @@
-import {defineComponent, ref,withModifiers} from "vue";
+import {defineComponent, PropType, ref, withModifiers} from "vue";
 import classes from './mailCard.module.scss'
 export default defineComponent({
   props:{
-    headImage:{
-      type:String,
-      // required:true
-
+    cardInfo:{
+      type:Object
     },
-    fromTitle:{
-      type:String,
-      // required:true
-    },
-    lineTitle:{
-      type:String,
-      // required:true
-    },
-    LineMessage:{
-      type:String,
-      // required:true
-    },
+    cardName:{
+      type:String
+    }
   },
   setup(props,context){
     const {emit} = context
     const imgUrl = ref('')
+    const cardInfo = props.cardInfo
     import('./head.jpg').then(res=>{
       imgUrl.value = res.default
     })
+    const nowSite = ref(0)
     return ()=>{
       return (
-        <div class={classes.main} onClick={withModifiers(()=>{
-          emit('click')
-          console.log(12)
-        } ,['stop','self']) }>
-          {/*<button >12</button>*/}
+        <div class={classes.main} onTouchstart={((e)=>{
+          nowSite.value = e.targetTouches[0].pageX
+
+        })
+          } onTouchmove={(e)=>{
+            let nowPageX = e.targetTouches[0].pageX
+
+        }}  onClick={()=>{
+          emit('myClick')
+        }}>
+
           <div class={classes.left}>
             <img src={imgUrl.value} class={classes.headImage}/>
           </div>
           <div class={classes.right}>
             <div class={classes.fromTitle}>
-              腾讯真内个
+              {props.cardName}
             </div>
-            <div class={classes.lineTitle}>
-              你真帅你妈的
-            </div>
-            <h3 class={classes.LineMessage}>灰色预览文字 灰色预览文字 灰色预览文字 灰色预览文字
-              灰色预览文字
-              灰色预览文字
-              灰色预览文字
-              灰色预览文字
-              灰色预览文字
+            <h3 class={classes.LineMessage}>{cardInfo?.LineMessage}
             </h3>
           </div>
           <div class={classes.bottom}></div>

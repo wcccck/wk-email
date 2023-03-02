@@ -1,0 +1,32 @@
+.main{
+  height: 40px;
+  padding: 0 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  span{
+    color: gray;
+  }
+  align-items: center;
+  input{
+    height: 40px;
+    margin-left: 16px;
+    outline: none;
+    border: none;
+    //width: 80%;
+    font-size: 17px;
+  }
+  .bottom{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #8A8B8C;
+    width: 100%;
+    transform: scaleY(0.1)
+  }
+  .right{
+    //display: flex;
+
+  }
+}

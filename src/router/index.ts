@@ -1,9 +1,9 @@
 import routes from './routes'
 import {createRouter,createWebHashHistory} from "vue-router";
 import useTokenStore from "../store/tokenStore";
-
+import {isMobile} from "../utils/index";
 const Router = createRouter({
-  routes,
+  routes:  routes ,
   history:createWebHashHistory()
 })
 // 白名单权限控制
@@ -17,7 +17,7 @@ Router.beforeEach((to,from,next)=>{
   if(!isWhiteLess){ // no lesswhite
       // 验证token
       const TokenStore = useTokenStore()
-      console.log(TokenStore.token)
+      // console.log(TokenStore.token)
     if(TokenStore.token && TokenStore.token !== ''){
       next()  // 放行 有token
     }else{

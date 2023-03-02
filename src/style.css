@@ -8,6 +8,9 @@
 
 .fade-enter-from,
 .fade-leave-to {
-  transform: translateX(-120px);
+  transform: translateX(-500px);
   opacity: 0;
+}
+html{
+  font-size: 37.5px;
 }

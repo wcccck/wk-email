@@ -17,11 +17,12 @@ export default defineComponent({
     }
   },
   setup(props,context){
+    const {emit} =context
     const LastName = computed(()=>{
       return `#icon-${props.IconName}`
     })
     return ()=>{
-      return   <svg aria-hidden='true' class={classes.iconSvg} style={{height:props.size,width:props.size}}>
+      return   <svg aria-hidden='true' class={classes.iconSvg} style={{height:props.size,width:props.size}} onTouchend={(e)=>{emit('myClick',e)} }>
         <use xlink:href={LastName.value}   fill='red'/>
       </svg>
     }

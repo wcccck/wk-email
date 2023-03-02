@@ -1,11 +1,11 @@
 import {defineComponent} from "vue";
-import Tabbar,{TabItem} from "../../components/tabbar/tabbar";
+import classes from "./profile.module.scss";
+import Cell from "../../components/cell/Cell";
 export default defineComponent({
+
   setup(props,context){
     return ()=>{
-      return <div>
-        i am profile
-      </div>
+      return <div class={classes.container}><Cell title={'设置'}/></div>
     }
   }
 })

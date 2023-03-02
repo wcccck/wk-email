@@ -1,0 +1,28 @@
+.container{
+  position: relative;
+  height: 70px;
+  //border: 1px solid gray;
+  font-size: 15px;
+  background: white;
+  .left{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 15px;
+    .title{
+      margin-left: 10px;
+    }
+  }
+  .right{
+
+  }
+  .bottom{
+    position: absolute;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: gray 1px;
+    transform: scaleY(.1);
+  }
+}

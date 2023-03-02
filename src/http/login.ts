@@ -1,4 +1,4 @@
-import serve from "../server/axios";
+import serve from "../utils/axios";
 
 export const loginRequest = function (data:object){
   return serve({

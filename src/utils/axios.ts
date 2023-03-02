@@ -1,7 +1,7 @@
 import axios from "axios";
-import {lessWhite} from '../router/index'
+import {lessWhite} from '../router'
 import useTokenStore from '../store/tokenStore'
-import {setToken} from "../utils/token";
+import {setToken} from "./token";
 
 const serve = axios.create({
   baseURL:"/api",
@@ -18,13 +18,12 @@ serve.interceptors.response.use((res)=>{
       if(err.response.data.code && err.response.data.code==401){
         tokenStore.token = ''
         setToken('')
-        // console.log(Router)
-        // Router.push('/login')
       }
   return err.response.data
 })
 
 serve.interceptors.request.use((config)=>{
+  // console.log(config)
   const tokenStore = useTokenStore()
   if(tokenStore.token){
     config.headers['token'] = tokenStore.token
