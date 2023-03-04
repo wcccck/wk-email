@@ -28,8 +28,6 @@ export default defineComponent({
 
         <div class={classes.left}>
           {slots.left?.()}
-          {/*{props.icon ?  <Icon IconName={props.icon} size={'1.7rem'}/> : ''}*/}
-          {/*<span class={classes.title}>{props.title}</span>*/}
         </div>
         <div class={classes.right}>
           {slots.right?.()}

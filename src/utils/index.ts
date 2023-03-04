@@ -43,6 +43,14 @@ export function ArrTransitionObj(f:Function,arr:Array<any>):object{
   for(let i = 0;i<length;i++){
 
   }
-
   return {}
+}
+
+
+export function reCordSort(Arr:Array<Record<string, Array<any>>>):void{
+
+
+  Arr.forEach((item,index)=>{
+
+  })
 }

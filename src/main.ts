@@ -5,7 +5,7 @@ import 'virtual:svg-icons-register'
 import './style.css'
 import App from './App'
 import Router from "./router";
-import 'default-passive-events'
+// import 'default-passive-events'
 
 createApp(App).use(createPinia().use(createPersistedState({
   serializer:{

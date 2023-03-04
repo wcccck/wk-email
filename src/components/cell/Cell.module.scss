@@ -1,9 +1,13 @@
 .container{
   position: relative;
-  height: 70px;
+  padding: 15px 0;
+  //height: 70px;
   //border: 1px solid gray;
   font-size: 15px;
   background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .left{
     display: flex;
     align-items: center;
@@ -14,7 +18,10 @@
     }
   }
   .right{
-
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-right: 15px;
   }
   .bottom{
     position: absolute;
