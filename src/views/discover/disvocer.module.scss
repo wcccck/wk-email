@@ -1,8 +1,16 @@
-.wrapper{
-  height: 200px;
+.container{
+  box-sizing: border-box;
+  padding-bottom: 58px;
+  height: 100vh;
   overflow: hidden;
-  .context{
-    border: 1px solid black;
 
+  .headerBg{
+    margin-bottom: 20px;
+    height: 300px;
+    width: 100vw;
+    //background-image: url("");
+    background: no-repeat;
+    background-size:100% 100%;
   }
+
 }

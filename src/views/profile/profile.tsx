@@ -18,7 +18,6 @@ export default defineComponent({
             right:()=>{
               return <div style={{display:"flex",alignItems:"center"}}>
                 <img style={{height:'140px',borderRadius:"10px"}} src="http://localhost/s1mple.jpg" alt=""/>
-                <Icon IconName={'zuojiantou'}></Icon>
               </div>
             }
           }}

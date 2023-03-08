@@ -1,12 +1,8 @@
 import {defineComponent, PropType, provide, inject, ref, Ref} from "vue";
 import classes from './tabbar.module.scss'
-import {useRouter, RouteLocationRaw,useRoute} from "vue-router";
+import {useRouter, RouteLocationRaw} from "vue-router";
 import useIndex from '../../store/TabBarIndex'
 import Icon from "../Icon/Icon";
-// type tabItem = {
-//   name:String,
-//   Index:number
-// }
 export default defineComponent({
   props: {
     activeIndex: {
@@ -18,7 +14,6 @@ export default defineComponent({
     const defaultSlots = ctx.slots.default!
     const activeIndex = ref(props.activeIndex || 0)
     provide('activeIndex',activeIndex)
-    // console.log(vNodes)
     return () => {
       const vNodes = defaultSlots().map((vNode,index)=>{
         if(!vNode.props){
@@ -55,12 +50,11 @@ export const TabItem = defineComponent({
     const index = useIndex()
     const ItemClick = function () {
       activeIndex.value = props.itemIndex as number
-      index.activeIndex = props.itemIndex
+      index.activeIndex = props.itemIndex as number
+      console.log('props item ' + props.itemIndex)
       Router.push(props.path!)
     }
     const Router = useRouter()
-
-    // console.log(message.activeIndex)
     return () => {
       return (
 

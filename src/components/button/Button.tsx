@@ -9,13 +9,7 @@ export default defineComponent({
     disable:{
       type:Boolean,
       default:false
-    },
-    // width:{
-    //   type:Number
-    // },
-    // height:{
-    //   type:Number
-    // }
+    }
   },
   setup(props,context){
     const {emit,slots} = context

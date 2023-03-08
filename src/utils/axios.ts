@@ -1,5 +1,4 @@
 import axios from "axios";
-import {lessWhite} from '../router'
 import useTokenStore from '../store/tokenStore'
 import {setToken} from "./token";
 
@@ -30,6 +29,7 @@ serve.interceptors.request.use((config)=>{
   }
   return config
 },(error)=>{
+
   return error
 })
 export default serve

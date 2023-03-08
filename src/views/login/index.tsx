@@ -7,8 +7,6 @@ import useToken from '../../store/tokenStore'
 import Input from "../../components/Input/Input";
 import Icon from "../../components/Icon/Icon";
 import useUserInfo from '../../store/UserStore'
-import {connectSSE} from "../../utils";
-
 export default defineComponent({
   setup(){
     const username = ref('')
@@ -21,14 +19,12 @@ export default defineComponent({
         alert('请输入')
       }else{
         const result = await loginRequest({username:username.value,password:password.value})
-        console.log(result)
         if(result.data && result.data.code == 200){
           const {data} = result.data
           setToken(data.myToken)
           userInfo.userInfo = data
           TokenStore.token = data.myToken
-          Router.push('/layout/message')
-          // const cSse = connectSSE()
+          await Router.push('/layout/message')
         }else{
           alert(result.msg)
         }
@@ -38,8 +34,6 @@ export default defineComponent({
     const InputType = ref('text')
     return ()=>{
       return <div class={classes.container}>
-        {/*<div>{username.value}{password.value}</div>*/}
-        {/*<header class={classes.header}>{'<'}</header>*/}
         <h2 class={classes.title}>登录</h2>
         <div>
           <form action="">

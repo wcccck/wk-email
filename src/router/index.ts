@@ -1,7 +1,6 @@
 import routes from './routes'
 import {createRouter,createWebHashHistory} from "vue-router";
 import useTokenStore from "../store/tokenStore";
-import {isMobile} from "../utils/index";
 const Router = createRouter({
   routes:  routes ,
   history:createWebHashHistory()
@@ -12,24 +11,20 @@ export const lessWhite =[
   '/register'
 ]
 Router.beforeEach((to,from,next)=>{
-  // console.log()
   let isWhiteLess = lessWhite.find((item)=>{return item === to.path})
   if(!isWhiteLess){ // no lesswhite
-      // 验证token
-      const TokenStore = useTokenStore()
-      // console.log(TokenStore.token)
+    // 验证token
+    const TokenStore = useTokenStore()
     if(TokenStore.token && TokenStore.token !== ''){
-      next()  // 放行 有token
+      next()
     }else{
       next('/login')
     }
 
   }else{
-  //   白名单 放行
+    //白名单 放行
     next()
   }
-
-
 
 })
 

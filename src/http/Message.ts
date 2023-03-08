@@ -14,11 +14,9 @@ export function sendMessage(data:MsgType){
   })
 }
 
-export function getReceiveMessage(data:object,id:number){
-  console.log(data)
+export function getReceiveMessage(id:number){
   return serve({
     method:"get",
-    params:data,
     url:`/message/${id}`
   })
 }

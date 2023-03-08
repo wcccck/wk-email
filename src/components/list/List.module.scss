@@ -1,0 +1,12 @@
+$distance:var(--distance,0px);
+.container{
+  //background: skyblue;
+  width: 100vw;
+  padding-bottom: 58px;
+  overflow: scroll;
+  height: 100%;
+  .flushItem{
+    background: pink;
+  }
+}
+

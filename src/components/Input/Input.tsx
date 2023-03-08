@@ -4,7 +4,8 @@ import {defineComponent, PropType, Ref} from "vue";
 export default defineComponent({
   props:{
     Model:{
-      type:Object as PropType<Ref<string>>
+      type:Object as PropType<Ref<string>>,
+      required:true
     },
     inputType:{
       type:String,
@@ -22,11 +23,8 @@ export default defineComponent({
         <div class={classes.main}>
           <div class={classes.left}>
             {slots.left?.()}
-            <input maxlength={props.maxLength} autocomplete={true} type={props.inputType} v-model={props.Model.value} onInput={(e)=>{
-              // props.Model && ( props.Model.value = e.target.value)
-            } } />
+            <input maxlength={props.maxLength} type={props.inputType} v-model={props.Model.value} />
           </div>
-
           <div class={classes.right}>
             {slots.right?.()}
           </div>

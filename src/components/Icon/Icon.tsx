@@ -23,7 +23,8 @@ export default defineComponent({
     })
     return ()=>{
       return   <svg aria-hidden='true' class={classes.iconSvg} style={{height:props.size,width:props.size}} onTouchend={(e)=>{emit('myClick',e)} }>
-        <use xlink:href={LastName.value}   fill='red'/>
+        {/*<use xlink:href={LastName.value}   fill='red'/>*/}
+        <use xlinkHref={LastName.value}   fill='red'/>
       </svg>
     }
   }

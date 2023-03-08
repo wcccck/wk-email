@@ -18,12 +18,10 @@ export default defineComponent({
   },
   setup(props,context){
     const Router = useRouter()
-    const {slots} = context
+    const {slots,emit} = context
     return ()=>{
-      return <div class={classes.container} onClick={()=>{
-        if(props.to){
-          Router.push(props.to)
-        }
+      return <div class={classes.container} onClick={(e)=>{
+        emit("createChat",e)
       } }>
 
         <div class={classes.left}>

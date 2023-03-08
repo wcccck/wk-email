@@ -1,4 +1,4 @@
-import {defineComponent, inject, nextTick, PropType, provide, Ref, ref, watch, watchEffect} from "vue";
+import {defineComponent, inject, nextTick, PropType, provide, ref, watch, onUnmounted, watchEffect} from "vue";
 import {useRoute,useRouter} from "vue-router";
 import classes from './chat.module.scss'
 import Icon from "../../../components/Icon/Icon";
@@ -15,14 +15,16 @@ export default defineComponent({
   },
   setup(props,context){
     const showChat = inject('chatShow')
-    // inject('chatArr') as Ref<Array<any>>
-    // const chatArr =
     const msgStore = MessageStore()
-    const user = userStore().userInfo
-    // getMyid
+    const UserStore = userStore()
+    const user = UserStore.userInfo
+    const friend = UserStore.userFriend
     const myId = user.id
-    // 获取toid
     const sendId = msgStore.currentToId
+    const nowFriend = friend.find(item=>{
+      return item.friend_id == msgStore.currentToId
+    })
+    const evtSource = new EventSource(`http://localhost:7777/chatSession/${sendId}`);
     // 初始化Message数据
     const sendMsg = ref<MsgType>({
       from:myId,
@@ -32,34 +34,41 @@ export default defineComponent({
       status:"1"
     })
 
+    onUnmounted(()=>{
+      evtSource.close()
+    })
     provide('sendMsg',sendMsg)
     const container = ref()
     nextTick(()=>{
       const item = container.value
       item.scrollTop = item.scrollHeight
     })
-    watch(container,(newValue,oldValue)=>{
-
+    watchEffect(()=>{
+      if(msgStore.currentMsgArr) {
+        if (container.value) {
+          setTimeout(()=>{ // 更新完成dom未必渲染完成 所以需要延迟一下
+            container.value.scrollTop = container.value.scrollHeight
+          },300)
+        }
+      }
     })
     return ()=>{
-      return <div class={classes.container}  ref={container} style={{display:showChat?.value == true ? 'block':"none"}}>
+      return <div class={classes.container}  style={{display:showChat?.value == true ? 'block':"none"}}>
         <header>
           <Icon IconName={'zuojiantou'} size={'1.7rem'} onMyClick={()=>{
             showChat.value = false
             msgStore.MsgCurrent = []
           }}></Icon>
-          <span style={{fontSize:"1.3rem"}}>{msgStore.currentToId}</span>
+          <span style={{fontSize:"1.3rem"}}>{nowFriend.friend_name}</span>
           <Icon IconName={'more'} size={'1.7rem'} onMyClick={()=>{console.log(4576)}}></Icon>
           <div class={classes.bottom}></div>
         </header>
-        <main>
+        <main ref={container}>
           {msgStore.currentMsgArr.map((item,index)=>{
-            return <Chat obj={item} Message={myId == item.from? 'right':'left'}></Chat>
+            return <Chat userImage={myId !== item.from  ?nowFriend.friend_image : ''} obj={item} Message={myId == item.from? 'right':'left'}></Chat>
           })}
         </main>
-        <Footer container={container}>
-
-        </Footer>
+        <Footer container={container}></Footer>
       </div>
     }
   }
@@ -96,18 +105,15 @@ const Chat = defineComponent({
       }else{
         alertDom.value.style.setProperty('--textColor','#ffffff')
       }
-
-      // console.log(alertDom.value)
     })
 
     let imgUrl = ref('')
      import('./head.jpg').then(res=>{
       imgUrl.value = res.default as string
     })
-         // .style.setProperty('--primaryColor', 'red');
     return ()=>{
       return <div class={[classes.Chat]} style={{flexDirection:props.Message == 'right' ? "row-reverse" : ""}}>
-          <img src={imgUrl.value} class={classes.headImag}/>
+          <img src={props.userImage?props.userImage : imgUrl.value} class={classes.headImag}/>
           <div ref={alertDom} class={[classes.Alert,props.Message == 'left' ? classes.leftAlert : classes.rightAlert]}>
             <span>{obj.msg}</span>
             <div class={[classes.triangle,props.Message == 'left' ? classes.triangleLeft : classes.triangleRight]}></div>
@@ -117,9 +123,6 @@ const Chat = defineComponent({
   }
 })
 import {sendMessage} from "../../../http/Message";
-
-
-
 const Footer = defineComponent({
   props:{
     container:{
@@ -136,21 +139,13 @@ const Footer = defineComponent({
         <input type="text" v-model={inputVal.value}/>
         <div class={classes.line}></div>
         <Button onMyClick={()=>{
+            if(inputVal.value.trim() == '') {
+              alert('不能发送空消息')
+              return
+            }
             sendMsg.value.msg = inputVal.value
             sendMessage(sendMsg.value).then(res=>{
               inputVal.value = ''
-              const item = props.container.value
-              let hei = item.scrollHeight
-              // let inn = setInterval(()=>{
-              //   console.log(hei)
-              //     if(hei !== item.scrollHeight){
-              //       item.scrollTop = item.scrollHeight
-              //       clearInterval(inn)
-              //     }else if(item.scrollHeight <= 1743){
-              //       clearInterval(inn)
-              //     }
-              // },0)
-
             })
         }} >发送</Button>
       </div>

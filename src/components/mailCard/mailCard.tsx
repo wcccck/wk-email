@@ -1,107 +1,71 @@
-import {defineComponent, nextTick, PropType, ref, withModifiers} from "vue";
+import {defineComponent, nextTick, onMounted, PropType, ref, withModifiers} from "vue";
 import classes from './mailCard.module.scss'
-import {debounce} from "../../utils";
+import {cardType} from "./cardInfo";
+import userStore from "../../store/UserStore";
+
 
 
 export default defineComponent({
   props:{
     cardInfo:{
-      type:Object
+      type:Object as PropType<cardType>
     },
-    cardName:{
+    lastMsg:{
       type:String
+    },
+    unReadNum:{
+      type:Number
     }
   },
   setup(props,context){
     const {emit} = context
     const imgUrl = ref('')
     const cardInfo = props.cardInfo
+    const userFriend = userStore().userFriend
+    // const currentFriend = userFriend.find(item=>{
+    //   return
+    // })
+    // console.log(cardInfo)
     import('./head.jpg').then(res=>{
       imgUrl.value = res.default
     })
 
     const container = ref()
     const startSlide = ref(true)
-    nextTick(()=>{
+    onMounted(()=>{
+      // dom渲染结束 开放滑动按钮
       startSlide.value = false
-      // container.value.style.transform = 'translateX(-60px)'
-      // console.log(container.value.style.transform)
     })
-    const nowSite = ref(0)
-    let nowPageX:number
+    function cardMove (e:TouchEvent){
+      console.log(e.targetTouches[0].clientX)
+    }
+    function cardStart (e:TouchEvent){
+
+    }
+    function cardEnd(e:TouchEvent){
+
+    }
     return ()=>{
       return (
         <div class={classes.main} onClick={()=>{
           emit('myClick')
         }}>
 
-          <div class={classes.body}  style={{left:"0px"}} ref={container} onTouchstart={((e)=>{
-            if(startSlide.value) return
-            let left = container.value.style.left.split('p')[0]
-            if(left == 0 ){
-              nowSite.value = e.targetTouches[0].pageX
-            }
-
-          })
-          } onTouchmove={(e)=>{
-            if(startSlide.value) return
-            let left = container.value.style.left.split('p')[0]
-            if(left == 0){
-
-            }
-            nowPageX = e.targetTouches[0].pageX
-            const slideSpace = nowPageX - nowSite.value // 移动的距离
-            // 0 ~ -180
-            // left <0 && left >-180
-
-            // left < 0 才能往右
-
-
-            if(left > -180 && slideSpace <0 ){
-              if(e.targetTouches[0].pageX <= -180){// 往左滑滑倒底了 再滑也不动
-                container.value.style.left = `-180px`
-              }else{
-                // 没到底
-                container.value.style.left = `${slideSpace}px`
-              }
-
-            }else if(left<=0 && slideSpace>-180){
-
-              container.value.style.left = `${slideSpace}px`
-            }
-
-          } } onTouchend={(e)=>{
-            if(startSlide.value) return
-            let left = container.value.style.left.split('p')[0]
-
-            // if(left<=50){
-            //   let n = left
-            //   var a = setInterval(()=>{
-            //     n--
-            //     container.value.style.left = `${n}px`
-            //     if(Math.trunc(n)==-180){
-            //       clearInterval(a)
-            //     }
-            //   },0)
-            // }
-            // if(left<= -90){
-            //   container.value.style.left = `-180px`
-            // }else{
-            //   container.value.style.left = `0px`
-            // }
-
-          } } >
+          <div class={classes.body}  style={{left:"0px"}} ref={container} onTouchstart={cardStart} onTouchmove={cardMove}
+               onTouchend={cardEnd} >
             <div class={classes.left}>
-              <img src={imgUrl.value} class={classes.headImage}/>
+              <img src={cardInfo?.friend_image} class={classes.headImage}/>
+              {props.unReadNum ? <div class={classes.redCircle}>
+                <span>{props.unReadNum}</span>
+              </div>: ''}
             </div>
             <div class={classes.right}>
               <div class={classes.fromTitle}>
-                {props.cardName}
+                {cardInfo?.friend_name}
               </div>
-              <h3 class={classes.LineMessage}>{cardInfo?.LineMessage}
+              <h3 class={classes.LineMessage}>{props.lastMsg}
               </h3>
             </div>
-
             <div style={{background:"skyblue",height:"100%",width:"130px",position:"absolute",right:"-150px"}}></div>
           </div>
           <div class={classes.bottom}></div>

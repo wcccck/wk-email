@@ -4,7 +4,6 @@ import Message from '../views/message/message'
 import Address from "../views/address/address";
 import layout from "../views/layout/layout";
 import linePage from "../views/linePage/linePage";
-// import Chat from "../views/message/ChatPage/chat";
 import {getToken} from "../utils/token";
 import Discover from "../views/discover/discover";
 import Profile from "../views/profile/profile";
@@ -13,10 +12,6 @@ const routes:RouteRecordRaw[] = [
     path:'/',
     redirect:'/layout/message'
   },
-  // {
-  //   path:"/chat",
-  //   component:Chat
-  // },
   {
     path:'/line',
     component:linePage
@@ -44,10 +39,6 @@ const routes:RouteRecordRaw[] = [
         path:'/layout/profile',
         component:Profile,
         name:'Profile',
-        meta:{
-
-        }
-
       },
     ]
   },

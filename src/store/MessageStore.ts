@@ -5,7 +5,6 @@ const store = defineStore('MsgStore',{
     return{
       currentMsgArr:[],
       MsgSSE:[],
-      MsgInitArr:[],
       currentToId:0
     }
   },

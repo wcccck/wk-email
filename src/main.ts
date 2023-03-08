@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
 import {createPinia} from "pinia";
-import {createPersistedState} from "pinia-plugin-persistedstate";
+import {createPersistedState} from "pinia-plugin-persistedstate"; // 持久化处理
 import 'virtual:svg-icons-register'
 import './style.css'
 import App from './App'
 import Router from "./router";
-// import 'default-passive-events'
+import 'default-passive-events'
 
 createApp(App).use(createPinia().use(createPersistedState({
   serializer:{
